@@ -4,6 +4,7 @@ import {
   UserAddOutlined,
   UserOutlined,
   UserSwitchOutlined,
+  AppleOutlined
 } from "@ant-design/icons";
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
@@ -36,6 +37,14 @@ function Sidenav({ color }) {
               <TableOutlined />
             </span>
             <span className="label">Tables</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="4">
+          <NavLink to="/companies">
+            <span className="icon">
+            <AppleOutlined />
+            </span>
+            <span className="label">Companies</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item className="menu-item-header" key="5">
