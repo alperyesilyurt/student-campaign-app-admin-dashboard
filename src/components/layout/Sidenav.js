@@ -4,7 +4,7 @@ import {
   UserAddOutlined,
   UserOutlined,
   UserSwitchOutlined,
-  AppleOutlined
+  AppleOutlined,
 } from "@ant-design/icons";
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
@@ -13,7 +13,6 @@ import logo from "../../assets/images/logo.png";
 function Sidenav({ color }) {
   const { pathname } = useLocation();
   const page = pathname.replace("/", "");
-
 
   return (
     <>
@@ -39,10 +38,18 @@ function Sidenav({ color }) {
             <span className="label">Tables</span>
           </NavLink>
         </Menu.Item>
+        <Menu.Item key="3">
+          <NavLink to="/users">
+            <span className="icon">
+              <TableOutlined />
+            </span>
+            <span className="label">Users</span>
+          </NavLink>
+        </Menu.Item>
         <Menu.Item key="4">
           <NavLink to="/companies">
             <span className="icon">
-            <AppleOutlined />
+              <AppleOutlined />
             </span>
             <span className="label">Companies</span>
           </NavLink>
