@@ -1,16 +1,4 @@
-/*!
-  =========================================================
-  * Muse Ant Design Dashboard - v1.0.0
-  =========================================================
-  * Product Page: https://www.creative-tim.com/product/muse-ant-design-dashboard
-  * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-  * Licensed under MIT (https://github.com/creativetimofficial/muse-ant-design-dashboard/blob/main/LICENSE.md)
-  * Coded by Creative Tim
-  =========================================================
-  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
-// import { useState } from "react";
 import { Menu, Button } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
@@ -192,32 +180,6 @@ function Sidenav({ color }) {
               {tables}
             </span>
             <span className="label">Tables</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <NavLink to="/billing">
-            <span
-              className="icon"
-              style={{
-                background: page === "billing" ? color : "",
-              }}
-            >
-              {billing}
-            </span>
-            <span className="label">Billing</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key="4">
-          <NavLink to="/rtl">
-            <span
-              className="icon"
-              style={{
-                background: page === "rtl" ? color : "",
-              }}
-            >
-              {rtl}
-            </span>
-            <span className="label">RTL</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item className="menu-item-header" key="5">
