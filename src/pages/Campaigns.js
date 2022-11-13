@@ -15,7 +15,7 @@ import styled from "styled-components";
 const { Text } = Typography;
 
 function Campaigns() {
-  const CompanyWrapper = styled.div`
+  const TableWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,32 +26,48 @@ function Campaigns() {
     {
       title: "Campaign",
       dataIndex: "name",
-      width: "10%",
+      render: (record) => (
+        <>
+          <TableWrapper>
+            <Text strong>{record}</Text>
+          </TableWrapper>
+        </>
+      ),
     },
-    /*     {
-      title: "Company",
-      dataIndex: "description",
-      width: "14%",
-
-    }, */
     {
       title: "Campaign Image",
       dataIndex: "campaignHeroImage",
-      render: (record) => <Image width={140} src={record} />,
-      width: "10%",
+
+      render: (record) => (
+        <TableWrapper>
+          <Image width={140} src={record} />
+        </TableWrapper>
+      ),
+    },
+    {
+      title: "Campaign Status",
+      render: (record) => (
+        <>
+          <TableWrapper>
+            <Text strong>Verified {record.isVerified ? "✅" : "❌"}</Text>
+            <Text strong>Active {record.isActive ? "✅" : "❌"}</Text>
+            <Text strong>Featured {record.isFeatured ? "✅" : "❌"}</Text>
+          </TableWrapper>
+        </>
+      ),
     },
     {
       title: "Company",
       dataIndex: "company",
+
       render: (record) => (
         <>
-          <CompanyWrapper>
-            <Image width={140} src={record.logo} />
+          <TableWrapper>
+            <Image width={80} src={record.logo} />
             <Text strong>{record.name}</Text>
-          </CompanyWrapper>
+          </TableWrapper>
         </>
       ),
-      width: "10%",
     },
   ];
 
@@ -76,6 +92,7 @@ function Campaigns() {
       {campaigns.isFetched && campaigns?.data?.data["campaigns"] != 0 && (
         <>
           <Table
+            bordered
             columns={columns}
             rowKey={(record) => record["_id"]}
             dataSource={campaigns?.data?.data}
