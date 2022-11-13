@@ -8,12 +8,11 @@ import {
   TagOutlined,
 } from "@ant-design/icons";
 import { Menu, Button } from "antd";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 function Sidenav({ color }) {
-  const { pathname } = useLocation();
-  const page = pathname.replace("/", "");
+
 
   return (
     <>
@@ -55,7 +54,7 @@ function Sidenav({ color }) {
             <span className="label">Companies</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="4">
+        <Menu.Item key="12">
           <NavLink to="/campaigns">
             <span className="icon">
             <TagOutlined />
