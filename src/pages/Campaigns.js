@@ -1,16 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { Input, Drawer, Button, Form, Modal, Table, Radio } from "antd";
+import {
+  Input,
+  Drawer,
+  Button,
+  Form,
+  Modal,
+  Table,
+  Typography,
+  Image,
+} from "antd";
 import { useGetAllCampaigns } from "../common/hooks/campaigns";
+import styled from "styled-components";
+
+const { Text } = Typography;
 
 function Campaigns() {
+  const CompanyWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
   const columns = [
     {
       title: "Campaign",
       dataIndex: "name",
+      width: "10%",
+    },
+    /*     {
+      title: "Company",
+      dataIndex: "description",
+      width: "14%",
+
+    }, */
+    {
+      title: "Campaign Image",
+      dataIndex: "campaignHeroImage",
+      render: (record) => <Image width={140} src={record} />,
+      width: "10%",
     },
     {
       title: "Company",
-      dataIndex: "name",
+      dataIndex: "company",
+      render: (record) => (
+        <>
+          <CompanyWrapper>
+            <Image width={140} src={record.logo} />
+            <Text strong>{record.name}</Text>
+          </CompanyWrapper>
+        </>
+      ),
+      width: "10%",
     },
   ];
 
