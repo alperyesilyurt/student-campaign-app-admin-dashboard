@@ -9,6 +9,7 @@ export const ENDPOINTS = {
     register: "v1/authentication/register",
   },
   getAllUsers: "/v1/users",
+  updateUserByID: `/v1/users`,
 };
 
 export const STORAGE_KEYS = {
