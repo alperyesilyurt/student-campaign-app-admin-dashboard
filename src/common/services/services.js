@@ -1,4 +1,3 @@
-
 import { ENDPOINTS } from "../constants/constants";
 import HttpClient from "./HttpClient";
 
@@ -13,6 +12,10 @@ export const services = {
   },
   getFeaturedCampaigns: async () => {
     const response = HttpClient.get(ENDPOINTS.campaignsFeatured);
+    return response;
+  },
+  getAllUsers: async (id) => {
+    const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
   },
   login: async (loginForm) => {
