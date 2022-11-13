@@ -1,8 +1,9 @@
-import { Input, Button, Form, Modal, Table } from "antd";
+import { Input, Drawer, Button, Form, Modal, Table, Radio } from "antd";
 
 import { async } from "q";
 import qs from "qs";
 import React, { useEffect, useState } from "react";
+import { useGetAllUsers } from "../common/hooks/users/use-get-users";
 
 const Users = () => {
   const columns = [
@@ -10,49 +11,60 @@ const Users = () => {
       title: "Name",
       dataIndex: "name",
       sorter: true,
-      render: (name) => `${name.first} ${name.last}`,
-      width: "20%",
+      render: (name) => `${name}`,
+      width: "14%",
     },
     {
-      title: "Gender",
-      dataIndex: "gender",
-      filters: [
-        {
-          text: "Male",
-          value: "male",
-        },
-        {
-          text: "Female",
-          value: "female",
-        },
-      ],
-      width: "20%",
+      title: "Surname",
+      dataIndex: "surname",
+      sorter: true,
+      width: "14%",
     },
     {
       title: "Email",
       dataIndex: "email",
+      width: "14%",
     },
+    {
+      title: "isUserActive",
+      dataIndex: "isUserActive",
+      render: (isUserActive) => `${isUserActive}`,
+      width: "14%",
+    },
+    {
+      title: "isEmailVerified",
+      dataIndex: "isEmailVerified",
+      render: (isEmailVerified) => `${isEmailVerified}`,
+      width: "14%",
+    },
+    {
+      title: "isPhoneVerified",
+      dataIndex: "isPhoneVerified",
+      render: (isPhoneVerified) => `${isPhoneVerified}`,
+      width: "14%",
+    },
+
     {
       title: "Edit",
       dataIndex: "edit",
 
       render: (text, record, index) => (
-        <Button onClick={() => (setClickedUser(record), setIsOpenModal(true))}>
+        <Button onClick={() => (setClickedUser(record), setIsOpenDrawer(true))}>
           Edit
         </Button>
       ),
-      width: "20%",
+      width: "14%",
     },
   ];
 
-  const getRandomuserParams = (params) => ({
-    results: params.pagination?.pageSize,
-    page: params.pagination?.current,
-    ...params,
-  });
+  // const getRandomuserParams = (params) => ({
+  //   results: params.pagination?.pageSize,
+  //   page: params.pagination?.current,
+  //   ...params,
+  // });
 
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+  // const [data, setData] = useState();
+  // const [loading, setLoading] = useState(false);
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
@@ -60,31 +72,34 @@ const Users = () => {
     },
   });
 
-  const fetchData = () => {
-    setLoading(true);
-    fetch(
-      `https://randomuser.me/api?${qs.stringify(
-        getRandomuserParams(tableParams)
-      )}`
-    )
-      .then((res) => res.json())
-      .then(({ results }) => {
-        setData(results);
-        setLoading(false);
-        setTableParams({
-          ...tableParams,
-          pagination: {
-            ...tableParams.pagination,
-            total: 200,
-            // 200 is mock data, you should read it from server
-            // total: data.totalCount,
-          },
-        });
-      });
-  };
+  // const fetchData = () => {
+  //   setLoading(true);
+  //   fetch(
+  //     `https://randomuser.me/api?${qs.stringify(
+  //       getRandomuserParams(tableParams)
+  //     )}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then(({ results }) => {
+  //       setData(results);
+  //       setLoading(false);
+  //       setTableParams({
+  //         ...tableParams,
+  //         pagination: {
+  //           ...tableParams.pagination,
+  //           total: 200,
+  //           // 200 is mock data, you should read it from server
+  //           // total: data.totalCount,
+  //         },
+  //       });
+  //     });
+  // };
+
+  const users = useGetAllUsers();
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    console.log("users :: ", users);
   }, [JSON.stringify(tableParams)]);
 
   const handleTableChange = (pagination, filters, sorter) => {
@@ -95,62 +110,79 @@ const Users = () => {
     });
   };
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const [clickedUser, setClickedUser] = useState(null);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
-  const changeUserInfo = async () => {
+  const changeUserInfo = async (newValues) => {
+    console.log("newValues :: ", newValues);
     console.log("clickedUSer :: ", clickedUser);
-    setIsOpenModal(false);
+    // setIsOpenModal(false);
   };
 
   return (
     <>
-      <Table
-        columns={columns}
-        rowKey={(record) => record.login.uuid}
-        dataSource={data}
-        pagination={{ ...tableParams.pagination, position: ["bottomCenter"] }}
-        loading={loading}
-        onChange={handleTableChange}
-      />
-      <ChangeUserInfoModal
-        isOpenModal={isOpenModal}
-        changeUserInfo={changeUserInfo}
-        setIsOpenModal={setIsOpenModal}
-      />
+      {users.isFetched && users?.data?.data["users"].length != 0 && (
+        <>
+          {console.log("users ::", users.data.data["users"])}
+          <Table
+            columns={columns}
+            rowKey={(record) => record["_id"]}
+            dataSource={users.data.data["users"]}
+            pagination={{
+              ...tableParams.pagination,
+              position: ["bottomCenter"],
+            }}
+            // loading={loading}
+            onChange={handleTableChange}
+          />
+        </>
+      )}
+      {isOpenDrawer && (
+        <ChangeUserInfoDrawer
+          isOpenDrawer={isOpenDrawer}
+          changeUserInfo={changeUserInfo}
+          setIsOpenDrawer={setIsOpenDrawer}
+          clickedUser={clickedUser}
+        />
+      )}
     </>
   );
 };
 export default Users;
 
-const ChangeUserInfoModal = (props) => {
-  const { isOpenModal, changeUserInfo, setIsOpenModal } = props;
+const ChangeUserInfoDrawer = (props) => {
+  const { isOpenDrawer, changeUserInfo, setIsOpenDrawer, clickedUser } = props;
 
   const onFinish = (values) => {
+    changeUserInfo(values);
     console.log("Success:", values);
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    console.log("drawer render edildil");
+  }, [isOpenDrawer]);
+
   return (
-    <Modal
-      title="Basic Modal"
-      open={isOpenModal}
-      onOk={() => changeUserInfo()}
-      onCancel={() => setIsOpenModal(false)}
+    <Drawer
+      title="Detailed person information"
+      width={520}
+      closable={false}
+      onClose={() => setIsOpenDrawer(false)}
+      open={isOpenDrawer}
     >
       <Form
         name="basic"
         labelCol={{
-          span: 4,
+          span: 6,
         }}
         wrapperCol={{
           span: 18,
         }}
-        initialValues={{
-          remember: true,
-        }}
+        initialValues={{ ...clickedUser }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -169,14 +201,15 @@ const ChangeUserInfoModal = (props) => {
         </Form.Item>
 
         <Form.Item
-          label="Gender"
-          name="gender"
+          label="Surname"
+          name="surname"
           rules={[
             {
               required: true,
-              message: "Please input your gender!",
+              message: "Please input your surname!",
             },
           ]}
+          style={{ marginTop: 30 }}
         >
           <Input />
         </Form.Item>
@@ -190,8 +223,58 @@ const ChangeUserInfoModal = (props) => {
               message: "Please input your email!",
             },
           ]}
+          style={{ marginTop: 30 }}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="isUserActive"
+          name="isUserActive"
+          rules={[
+            {
+              required: true,
+              message: "Please input your isUserActive!",
+            },
+          ]}
+          style={{ marginTop: 30 }}
+        >
+          <Radio.Group>
+            <Radio value="true"> true</Radio>
+            <Radio value="false"> false </Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item
+          label="isEmailVerified"
+          name="isEmailVerified"
+          rules={[
+            {
+              required: true,
+              message: "Please input your isEmailVerified!",
+            },
+          ]}
+          style={{ marginTop: 30 }}
+        >
+          <Radio.Group>
+            <Radio value="true"> true</Radio>
+            <Radio value="false"> false </Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item
+          label="isPhoneVerified"
+          name="isPhoneVerified"
+          rules={[
+            {
+              required: true,
+              message: "Please input your isPhoneVerified!",
+            },
+          ]}
+          style={{ marginTop: 30 }}
+        >
+          <Radio.Group>
+            <Radio value="true"> true</Radio>
+            <Radio value="false"> false </Radio>
+          </Radio.Group>
         </Form.Item>
 
         <Form.Item
@@ -207,6 +290,6 @@ const ChangeUserInfoModal = (props) => {
           </Button>
         </Form.Item>
       </Form>
-    </Modal>
+    </Drawer>
   );
 };

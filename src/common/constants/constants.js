@@ -8,6 +8,7 @@ export const ENDPOINTS = {
     login: "v1/authentication/login",
     register: "v1/authentication/register",
   },
+  getAllUsers: "/v1/users",
 };
 
 export const STORAGE_KEYS = {
