@@ -1,5 +1,5 @@
-import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
-import React, { useState } from 'react';
+import { Form, Input, InputNumber, Popconfirm, Table, Typography } from "antd";
+import React, { useState } from "react";
 const originData = [];
 for (let i = 0; i < 100; i++) {
   originData.push({
@@ -19,7 +19,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -46,19 +46,19 @@ const EditableCell = ({
 const Companies = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
-  const [editingKey, setEditingKey] = useState('');
+  const [editingKey, setEditingKey] = useState("");
   const isEditing = (record) => record.key === editingKey;
   const edit = (record) => {
     form.setFieldsValue({
-      name: '',
-      age: '',
-      address: '',
+      name: "",
+      age: "",
+      address: "",
       ...record,
     });
     setEditingKey(record.key);
   };
   const cancel = () => {
-    setEditingKey('');
+    setEditingKey("");
   };
   const save = async (key) => {
     try {
@@ -72,38 +72,38 @@ const Companies = () => {
           ...row,
         });
         setData(newData);
-        setEditingKey('');
+        setEditingKey("");
       } else {
         newData.push(row);
         setData(newData);
-        setEditingKey('');
+        setEditingKey("");
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
+      console.log("Validate Failed:", errInfo);
     }
   };
   const columns = [
     {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
+      title: "name",
+      dataIndex: "name",
+      width: "25%",
       editable: true,
     },
     {
-      title: 'age',
-      dataIndex: 'age',
-      width: '15%',
+      title: "age",
+      dataIndex: "age",
+      width: "15%",
       editable: true,
     },
     {
-      title: 'address',
-      dataIndex: 'address',
-      width: '40%',
+      title: "address",
+      dataIndex: "address",
+      width: "40%",
       editable: true,
     },
     {
-      title: 'operation',
-      dataIndex: 'operation',
+      title: "operation",
+      dataIndex: "operation",
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -121,7 +121,10 @@ const Companies = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+          <Typography.Link
+            disabled={editingKey !== ""}
+            onClick={() => edit(record)}
+          >
             Edit
           </Typography.Link>
         );
@@ -136,7 +139,7 @@ const Companies = () => {
       ...col,
       onCell: (record) => ({
         record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
+        inputType: col.dataIndex === "age" ? "number" : "text",
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
