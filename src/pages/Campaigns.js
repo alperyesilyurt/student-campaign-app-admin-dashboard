@@ -8,10 +8,12 @@ import {
   Typography,
   Image,
   Radio,
+  notification,
 } from "antd";
 import { useGetAllCampaigns } from "../common/hooks/campaigns";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
+import { services } from "../common/services/services";
 
 const { Text } = Typography;
 
@@ -28,6 +30,7 @@ function Campaigns() {
       title: "Campaign",
       dataIndex: "name",
       align: 'center',
+      sorter: true,
       render: (record) => (
         <>
           <TableWrapper>
@@ -112,9 +115,34 @@ function Campaigns() {
     console.log("clickedUSer :: ", clickedUser);
     // setIsOpenModal(false);
   };
+
+
+  const updateCampaign = async (id, payload) => {
+    try {
+      const response = await services.updateCampaign(id, payload);
+      if (response && !response.error) {
+        const args = {
+          message: "Updated",
+          description: "User updated",
+          duration: 6000,
+        };
+        notification.open(args);
+      }
+    } catch (error) {
+      const args = {
+        message: "Not updated ❌",
+        description: "User couldn't updated ❌",
+        duration: 6000,
+      };
+
+      notification.open(args);
+    }
+    //fetchUsers();
+  };
+
   return (
     <>
-      {campaigns.isFetched && campaigns?.data?.data["campaigns"] != 0 && (
+      {campaigns.isFetched && campaigns?.data?.data != 0 && (
         <>
           <Table
             bordered
@@ -131,11 +159,12 @@ function Campaigns() {
         </>
       )}
       {isOpenDrawer && (
-        <ChangeUserInfoDrawer
+        <ChangeCampaignInfoDrawer
           isOpenDrawer={isOpenDrawer}
           changeUserInfo={changeUserInfo}
           setIsOpenDrawer={setIsOpenDrawer}
           clickedUser={clickedUser}
+          updateCampaign={updateCampaign}
         />
       )}
     </>
@@ -145,13 +174,21 @@ function Campaigns() {
 export default Campaigns;
 
 
-const ChangeUserInfoDrawer = (props) => {
-    const { isOpenDrawer, changeUserInfo, setIsOpenDrawer, clickedUser } = props;
+const ChangeCampaignInfoDrawer = (props) => {
+    const { isOpenDrawer, changeUserInfo, setIsOpenDrawer, clickedUser, updateCampaign } = props;
   
     const onFinish = (values) => {
-      changeUserInfo(values);
+      const payload = {
+/*         email: userData.email,
+        is_admin: values.role === "admin" ? true : false,
+        total_balance: parseInt(values.total_balance), */
+      };
+      //updateCampaign(userData.id, payload);
+      //changeUserInfo(values);
       console.log("Success:", values);
     };
+
+  
   
     const onFinishFailed = (errorInfo) => {
       console.log("Failed:", errorInfo);
@@ -179,7 +216,7 @@ const ChangeUserInfoDrawer = (props) => {
           autoComplete="off"
         >
           <Form.Item
-            label="Name"
+            label="Campaign"
             name="name"
             rules={[
               {
@@ -190,35 +227,7 @@ const ChangeUserInfoDrawer = (props) => {
           >
             <Input />
           </Form.Item>
-  
-          <Form.Item
-            label="Surname"
-            name="surname"
-            rules={[
-              {
-                required: true,
-                message: "Please input your surname!",
-              },
-            ]}
-            style={{ marginTop: 30 }}
-          >
-            <Input />
-          </Form.Item>
-  
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-            style={{ marginTop: 30 }}
-          >
-            <Input />
-          </Form.Item>
-  
+
           <Form.Item
             label="isUserActive"
             name="isUserActive"
