@@ -110,10 +110,7 @@ function Campaigns() {
   const [clickedUser, setClickedUser] = useState(null);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
-  const mutateCampaign = useMutation(services.updateCampaign)
-
   const updateCampaign = async (id, payload) => {
-    mutateCampaign.mutate(id,payload)
     try {
       const response = await services.updateCampaign(id, payload);
       if (response && !response.error) {
@@ -133,7 +130,7 @@ function Campaigns() {
 
       notification.open(args);
     }
-    //fetchUsers();
+
   };
 
   return (
