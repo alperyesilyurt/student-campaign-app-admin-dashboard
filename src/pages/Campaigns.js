@@ -110,12 +110,13 @@ function Campaigns() {
   const [clickedUser, setClickedUser] = useState(null);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
-  const changeUserInfo = async (newValues) => {
+
+  const changeCampaignInfo = async (newValues) => {
     console.log("newValues :: ", newValues);
     console.log("clickedUSer :: ", clickedUser);
     // setIsOpenModal(false);
   };
-
+ 
 
   const updateCampaign = async (id, payload) => {
     try {
@@ -161,7 +162,7 @@ function Campaigns() {
       {isOpenDrawer && (
         <ChangeCampaignInfoDrawer
           isOpenDrawer={isOpenDrawer}
-          changeUserInfo={changeUserInfo}
+          changeCampaignInfo={changeCampaignInfo}
           setIsOpenDrawer={setIsOpenDrawer}
           clickedUser={clickedUser}
           updateCampaign={updateCampaign}
@@ -175,8 +176,9 @@ export default Campaigns;
 
 
 const ChangeCampaignInfoDrawer = (props) => {
-    const { isOpenDrawer, changeUserInfo, setIsOpenDrawer, clickedUser, updateCampaign } = props;
+    const { isOpenDrawer, setIsOpenDrawer, clickedUser, updateCampaign } = props;
   
+    console.log("click",clickedUser)
     const onFinish = (values) => {
       const payload = {
 /*         email: userData.email,
