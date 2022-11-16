@@ -2,6 +2,10 @@ import { ENDPOINTS } from "../constants/constants";
 import HttpClient from "./HttpClient";
 
 export const services = {
+  updateCampaign: async (id, body) => {
+    const response = HttpClient.patch(ENDPOINTS.campaigns +`/` + id, body);
+    return response;
+  }, 
   getAllCampaigns: async () => {
     const response = HttpClient.get(ENDPOINTS.campaigns);
     return response;

@@ -10,6 +10,8 @@ import "antd/dist/antd.css";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Users from "./pages/Users";
+import Campaigns from "./pages/Campaigns";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ function App() {
             <Route exact path="/companies" component={Companies} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/users" component={Users} />
+            <Route exact path="/campaigns" component={Campaigns} />
+
             <Redirect from="*" to="/dashboard" />
           </Main>
         </Switch>

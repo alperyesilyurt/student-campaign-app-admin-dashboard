@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { services } from "../../services/services";
 
-export const useGetAllCampaigns = () => {
-  const getAllCampaigns = useQuery(
+export const useUpdateCampaign = () => {
+  const updateCampaign = useQuery(
     ["campaigns"],
     () => {
-      return services.getAllCampaigns();
+      return services.updateCampaign();
     },
     {
       select: (data) => data,
     }
   );
 
-  return getAllCampaigns;
+  return updateCampaign;
 };
