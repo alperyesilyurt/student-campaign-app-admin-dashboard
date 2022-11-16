@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Input,
-  Drawer,
-  Button,
-  Form,
-  Table,
-  Typography,
-  Image,
-  Radio,
-  notification,
-} from "antd";
+import { Button, Table, Typography, Image, notification } from "antd";
 import { useGetAllCampaigns } from "../common/hooks/campaigns";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { services } from "../common/services/services";
+import ChangeCampaignInfoDrawer from "../components/drawers/ChangeCampaignInfoDrawer";
+import { useMutation } from "@tanstack/react-query";
 
 const { Text } = Typography;
 
@@ -29,7 +21,7 @@ function Campaigns() {
     {
       title: "Campaign",
       dataIndex: "name",
-      align: 'center',
+      align: "center",
       sorter: true,
       render: (record) => (
         <>
@@ -42,7 +34,7 @@ function Campaigns() {
     {
       title: "Campaign Image",
       dataIndex: "campaignHeroImage",
-      align: 'center',
+      align: "center",
       render: (record) => (
         <TableWrapper>
           <Image width={140} src={record} />
@@ -51,7 +43,7 @@ function Campaigns() {
     },
     {
       title: "Campaign Status",
-      align: 'center',
+      align: "center",
       render: (record) => (
         <>
           <TableWrapper>
@@ -65,7 +57,7 @@ function Campaigns() {
     {
       title: "Company",
       dataIndex: "company",
-      align: 'center',
+      align: "center",
       render: (record) => (
         <>
           <TableWrapper>
@@ -78,11 +70,16 @@ function Campaigns() {
     {
       title: "Edit",
       dataIndex: "edit",
-      align: 'center',
-      render: (record) => (
+      align: "center",
+      render: (_, record) => (
         <>
           <TableWrapper>
-          <Button onClick={() => (setClickedUser(record), setIsOpenDrawer(true))} type="dashed" icon={<EditOutlined />} size="large" />
+            <Button
+              onClick={() => openEditUserDrawer(record)}
+              type="dashed"
+              icon={<EditOutlined />}
+              size="large"
+            />
           </TableWrapper>
         </>
       ),
@@ -106,19 +103,17 @@ function Campaigns() {
       ...sorter,
     });
   };
-
+  const openEditUserDrawer = (record) => {
+    setClickedUser(record);
+    setIsOpenDrawer(true);
+  };
   const [clickedUser, setClickedUser] = useState(null);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
-
-  const changeCampaignInfo = async (newValues) => {
-    console.log("newValues :: ", newValues);
-    console.log("clickedUSer :: ", clickedUser);
-    // setIsOpenModal(false);
-  };
- 
+  const mutateCampaign = useMutation(services.updateCampaign)
 
   const updateCampaign = async (id, payload) => {
+    mutateCampaign.mutate(id,payload)
     try {
       const response = await services.updateCampaign(id, payload);
       if (response && !response.error) {
@@ -143,12 +138,11 @@ function Campaigns() {
 
   return (
     <>
-      {campaigns.isFetched && campaigns?.data?.data != 0 && (
+      {campaigns.isFetched && (
         <>
           <Table
             bordered
             columns={columns}
-            rowKey={(record) => record["_id"]}
             dataSource={campaigns?.data?.data}
             pagination={{
               ...tableParams.pagination,
@@ -162,7 +156,6 @@ function Campaigns() {
       {isOpenDrawer && (
         <ChangeCampaignInfoDrawer
           isOpenDrawer={isOpenDrawer}
-          changeCampaignInfo={changeCampaignInfo}
           setIsOpenDrawer={setIsOpenDrawer}
           clickedUser={clickedUser}
           updateCampaign={updateCampaign}
@@ -173,5 +166,3 @@ function Campaigns() {
 }
 
 export default Campaigns;
-
-

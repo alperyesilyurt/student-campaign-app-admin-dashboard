@@ -1,67 +1,58 @@
-import {
-    Input,
-    Drawer,
-    Button,
-    Form,
-    Radio,
-  } from "antd";
+import { Input, Drawer, Button, Form, Radio } from "antd";
 
 const ChangeCampaignInfoDrawer = (props) => {
-    const { isOpenDrawer, setIsOpenDrawer, clickedUser, updateCampaign } = props;
-  
-    console.log("click",clickedUser)
-    const onFinish = (values) => {
-      const payload = {
-/*         email: userData.email,
-        is_admin: values.role === "admin" ? true : false,
-        total_balance: parseInt(values.total_balance), */
-      };
-      //updateCampaign(userData.id, payload);
-      //changeUserInfo(values);
-      console.log("Success:", values);
-    };
+  const { isOpenDrawer, setIsOpenDrawer, clickedUser, updateCampaign } = props;
 
-  
-  
-    const onFinishFailed = (errorInfo) => {
-      console.log("Failed:", errorInfo);
+  const onFinish = (values) => {
+    console.log(values)
+    const payload = {
+      company: {
+        name: values.name,
+        logo: "https://docs.nestjs.com/assets/logo-small.svg",
+      },
     };
+    updateCampaign(clickedUser["_id"], payload);
+  };
 
-    return (
-      <Drawer
-        title="Detailed Campaigns Edit"
-        width={520}
-        closable={true}
-        onClose={() => setIsOpenDrawer(false)}
-        open={isOpenDrawer}
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  return (
+    <Drawer
+      title="Detailed Campaigns Edit"
+      width={520}
+      closable={true}
+      onClose={() => setIsOpenDrawer(false)}
+      open={isOpenDrawer}
+    >
+      <Form
+        name="basic"
+        labelCol={{
+          span: 6,
+        }}
+        wrapperCol={{
+          span: 18,
+        }}
+        initialValues={{ ...clickedUser }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <Form
-          name="basic"
-          labelCol={{
-            span: 6,
-          }}
-          wrapperCol={{
-            span: 18,
-          }}
-          initialValues={{ ...clickedUser }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+        <Form.Item
+          label="Campaign"
+          name="name"
+          rules={[
+            {
+              required: true,
+              message: "Please input your name!",
+            },
+          ]}
         >
-          <Form.Item
-            label="Campaign"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Please input your name!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          <Input />
+        </Form.Item>
 
-          <Form.Item
+        {/*           <Form.Item
             label="isUserActive"
             name="isUserActive"
             rules={[
@@ -108,21 +99,23 @@ const ChangeCampaignInfoDrawer = (props) => {
               <Radio value="true"> true</Radio>
               <Radio value="false"> false </Radio>
             </Radio.Group>
-          </Form.Item>
-  
-          <Form.Item
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginTop: 40,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Drawer>
-    );
-  };
+          </Form.Item> */}
+
+        <Form.Item
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: 40,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Drawer>
+  );
+};
+
+export default ChangeCampaignInfoDrawer;
