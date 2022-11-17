@@ -1,6 +1,5 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
-import Tables from "./pages/Tables";
 import Companies from "./pages/Companies";
 import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
@@ -26,7 +25,6 @@ function App() {
           <Route path="/sign-in" exact component={SignIn} />
           <Main>
             <Route exact path="/dashboard" component={Home} />
-            <Route exact path="/tables" component={Tables} />
             <Route exact path="/companies" component={Companies} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/users" component={Users} />
