@@ -1,13 +1,4 @@
-import {
-  Input,
-  Drawer,
-  Button,
-  Form,
-  Modal,
-  Table,
-  Radio,
-  message,
-} from "antd";
+import { Input, Drawer, Button, Form, Radio } from "antd";
 
 const UpdateUserInfoDrawer = (props) => {
   const {

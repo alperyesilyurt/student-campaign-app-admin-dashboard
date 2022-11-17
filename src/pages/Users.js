@@ -1,16 +1,12 @@
+/* eslint-disable no-sequences */
 import { useMutation } from "@tanstack/react-query";
 import {
-  Input,
-  Drawer,
   Button,
-  Form,
-  Modal,
   Table,
-  Radio,
   message,
 } from "antd";
 
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useGetAllUsers } from "../common/hooks/users/use-get-users";
 import { services } from "../common/services/services";
 import UpdateUserInfoDrawer from "../components/drawers/UpdateUserInfoDrawer";
@@ -76,8 +72,6 @@ const Users = () => {
 
   const users = useGetAllUsers();
 
-  useEffect(() => {}, [JSON.stringify(tableParams)]);
-
   const handleTableChange = (pagination, filters, sorter) => {
     setTableParams({
       pagination,
@@ -105,7 +99,7 @@ const Users = () => {
 
   return (
     <>
-      {users.isFetched && users?.data?.data["users"].length != 0 && (
+      {users.isFetched && (
         <>
           <Table
             columns={columns}

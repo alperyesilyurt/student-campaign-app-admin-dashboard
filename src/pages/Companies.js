@@ -117,7 +117,7 @@ const Companies = () => {
               Save
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <p>Cancel</p>
             </Popconfirm>
           </span>
         ) : (
