@@ -59,7 +59,7 @@ function Profile() {
                 <Avatar size={74} shape="square" src={profilavatar} />
 
                 <div className="avatar-info">
-                  <h4 className="font-semibold m-0">Sarah Jacob</h4>
+                  <h4 className="font-semibold m-0">Alper Yeşilyurt</h4>
                   <p>CEO / Co-Founder</p>
                 </div>
               </Avatar.Group>
