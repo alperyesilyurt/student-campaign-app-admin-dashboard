@@ -10,7 +10,7 @@ const { Header: AntHeader, Content, Sider } = Layout;
 function Main({ children }) {
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState("right");
-  const [sidenavColor, setSidenavColor] = useState("#1890ff");
+  const [sidenavColor, setSidenavColor] = useState("#7CF2B8");
   const [sidenavType, setSidenavType] = useState("transparent");
   const [fixed, setFixed] = useState(false);
 
@@ -41,7 +41,7 @@ function Main({ children }) {
         placement={placement === "right" ? "left" : "right"}
         closable={false}
         onClose={() => setVisible(false)}
-        visible={visible}
+        open={visible}
         key={placement === "right" ? "left" : "right"}
         width={250}
         className={`drawer-sidebar ${

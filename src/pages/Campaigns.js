@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Button, Table, Typography, Image, notification } from "antd";
 import { useGetAllCampaigns } from "../common/hooks/campaigns";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { services } from "../common/services/services";
 import ChangeCampaignInfoDrawer from "../components/drawers/ChangeCampaignInfoDrawer";
-import { useMutation } from "@tanstack/react-query";
 
 const { Text } = Typography;
 
@@ -141,6 +140,7 @@ function Campaigns() {
             bordered
             columns={columns}
             dataSource={campaigns?.data?.data}
+            rowKey={(record) => record["_id"]}
             pagination={{
               ...tableParams.pagination,
               position: ["bottomCenter"],

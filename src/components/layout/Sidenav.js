@@ -1,24 +1,23 @@
 import {
   AppstoreOutlined,
-  TableOutlined,
   UserAddOutlined,
   UserOutlined,
   UserSwitchOutlined,
   AppleOutlined,
   TagOutlined,
+  MailOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Menu, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 function Sidenav({ color }) {
-
-
   return (
     <>
       <div className="brand">
         <img src={logo} alt="" />
-        <span>Dashboard</span>
+        <span> Dashboard</span>
       </div>
       <hr />
       <Menu theme="light" mode="inline">
@@ -31,22 +30,14 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item>
         <Menu.Item key="2">
-          <NavLink to="/tables">
-            <span className="icon">
-              <TableOutlined />
-            </span>
-            <span className="label">Tables</span>
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key="3">
           <NavLink to="/users">
             <span className="icon">
-              <TableOutlined />
+              <UsergroupAddOutlined />
             </span>
             <span className="label">Users</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="4">
+        <Menu.Item key="3">
           <NavLink to="/companies">
             <span className="icon">
               <AppleOutlined />
@@ -54,18 +45,26 @@ function Sidenav({ color }) {
             <span className="label">Companies</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="12">
+        <Menu.Item key="4">
           <NavLink to="/campaigns">
             <span className="icon">
-            <TagOutlined />
+              <TagOutlined />
             </span>
             <span className="label">Campaigns</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item className="menu-item-header" key="5">
+        <Menu.Item key="5">
+          <NavLink to="/mails">
+            <span className="icon">
+              <MailOutlined />
+            </span>
+            <span className="label">Mails</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item className="menu-item-header" key="6">
           Account Pages
         </Menu.Item>
-        <Menu.Item key="6">
+        <Menu.Item key="7">
           <NavLink to="/profile">
             <span className="icon">
               <UserOutlined />
@@ -73,7 +72,7 @@ function Sidenav({ color }) {
             <span className="label">Profile</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="7">
+        <Menu.Item key="8">
           <NavLink to="/sign-in">
             <span className="icon">
               <UserAddOutlined />
@@ -81,9 +80,9 @@ function Sidenav({ color }) {
             <span className="label">Sign In</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="8">
+        <Menu.Item key="9">
           <NavLink to="/sign-up">
-            <span className="icon">
+            <span className="icon" style={{ color }}>
               <UserSwitchOutlined />
             </span>
             <span className="label">Sign Up</span>
