@@ -11,6 +11,7 @@ import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Users from "./pages/Users";
 import Campaigns from "./pages/Campaigns";
+import Mails from "./pages/Mails";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -30,6 +31,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/campaigns" component={Campaigns} />
+            <Route exact path="/mails" component={Mails} />
 
             <Redirect from="*" to="/dashboard" />
           </Main>

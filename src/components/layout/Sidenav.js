@@ -6,6 +6,7 @@ import {
   UserSwitchOutlined,
   AppleOutlined,
   TagOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import { Menu, Button } from "antd";
 import { NavLink } from "react-router-dom";
@@ -60,6 +61,14 @@ function Sidenav({ color }) {
             <TagOutlined />
             </span>
             <span className="label">Campaigns</span>
+          </NavLink>
+        </Menu.Item>
+        <Menu.Item key="19">
+          <NavLink to="/mails">
+            <span className="icon">
+            <MailOutlined />
+            </span>
+            <span className="label">Mails</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item className="menu-item-header" key="5">
