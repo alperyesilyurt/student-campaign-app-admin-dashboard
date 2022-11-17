@@ -18,9 +18,17 @@ export const services = {
     const response = HttpClient.get(ENDPOINTS.campaignsFeatured);
     return response;
   },
-  getAllUsers: async (id) => {
+  getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
+  },
+  updateUserByID: async (id) => {
+    try {
+      const response = HttpClient.put(`${ENDPOINTS.updateUserByID}/${id}`);
+      return response;
+    } catch (error) {
+      console.log("updateUserByID error ::", error);
+    }
   },
   login: async (loginForm) => {
     try {
