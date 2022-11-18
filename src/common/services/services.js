@@ -18,6 +18,10 @@ export const services = {
     const response = HttpClient.get(ENDPOINTS.campaignsFeatured);
     return response;
   },
+  getAllMailTemplates: async () => {
+    const response = HttpClient.get(ENDPOINTS.mailTemplates);
+    return response;
+  },
   getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
