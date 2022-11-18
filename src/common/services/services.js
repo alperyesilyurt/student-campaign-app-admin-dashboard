@@ -22,6 +22,10 @@ export const services = {
     const response = HttpClient.get(ENDPOINTS.mailTemplates);
     return response;
   },
+  createMailTemplate: async (body) => {
+    const response = HttpClient.patch(ENDPOINTS.mailTemplates , body);
+    return response;
+  }, 
   getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
