@@ -23,11 +23,11 @@ export const services = {
     return response;
   },
   createMailTemplate: async (body) => {
-    const response = HttpClient.patch(ENDPOINTS.mailTemplates , body);
+    const response = HttpClient.put(ENDPOINTS.mailTemplates , body);
     return response;
   }, 
   deleteMailTemplate: async (id) => {
-    const response = HttpClient.patch(ENDPOINTS.mailTemplates+`/` + id);
+    const response = HttpClient.delete(ENDPOINTS.mailTemplates+`/` + id);
     return response;
   }, 
   getAllUsers: async () => {
