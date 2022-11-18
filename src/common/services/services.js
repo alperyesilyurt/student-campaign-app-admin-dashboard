@@ -23,7 +23,7 @@ export const services = {
     return response;
   },
   createMailTemplate: async (body) => {
-    const response = HttpClient.put(ENDPOINTS.mailTemplates , body);
+    const response = HttpClient.post(ENDPOINTS.mailTemplates , body);
     return response;
   }, 
   deleteMailTemplate: async (id) => {
