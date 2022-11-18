@@ -10,6 +10,7 @@ export const ENDPOINTS = {
   },
   getAllUsers: "/v1/users",
   updateUserByID: `/v1/users`,
+  mailTemplates: `/v1/mailtemplates`,
 };
 
 export const STORAGE_KEYS = {

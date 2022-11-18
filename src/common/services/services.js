@@ -18,6 +18,18 @@ export const services = {
     const response = HttpClient.get(ENDPOINTS.campaignsFeatured);
     return response;
   },
+  getAllMailTemplates: async () => {
+    const response = HttpClient.get(ENDPOINTS.mailTemplates);
+    return response;
+  },
+  createMailTemplate: async (body) => {
+    const response = HttpClient.post(ENDPOINTS.mailTemplates , body);
+    return response;
+  }, 
+  deleteMailTemplate: async (id) => {
+    const response = HttpClient.delete(ENDPOINTS.mailTemplates+`/` + id);
+    return response;
+  }, 
   getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
