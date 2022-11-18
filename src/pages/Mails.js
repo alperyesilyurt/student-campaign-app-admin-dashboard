@@ -70,8 +70,8 @@ const Mails = () => {
       description: values.description,
       templatePathName: values.templatePathName,
       title: values.title,
-      useCases: values.useCases,
-      emailContext: values.emailContext,
+      useCases: [values.useCases],
+      emailContext: [values.emailContext],
       templateSource: values.templateSource,
     };
     createMailTemplate(payload);
