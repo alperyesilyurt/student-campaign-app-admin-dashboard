@@ -26,6 +26,10 @@ export const services = {
     const response = HttpClient.patch(ENDPOINTS.mailTemplates , body);
     return response;
   }, 
+  deleteMailTemplate: async (id) => {
+    const response = HttpClient.patch(ENDPOINTS.mailTemplates+`/` + id);
+    return response;
+  }, 
   getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;

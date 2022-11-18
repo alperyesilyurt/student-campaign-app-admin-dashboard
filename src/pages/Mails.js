@@ -11,7 +11,7 @@ const Mails = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    padding: 10px;
   `;
   const CardWrapper = styled.div`
     display: flex;
@@ -36,6 +36,28 @@ const Mails = () => {
       const args = {
         message: "Not created ❌",
         description: "Mail Template couldn't created ❌",
+        duration: 6000,
+      };
+
+      notification.open(args);
+    }
+  };
+
+  const deleteMailTemplate = async (id) => {
+    try {
+      const response = await services.deleteMailTemplate(id);
+      if (response && !response.error) {
+        const args = {
+          message: "deleted",
+          description: "Mail Template deleted",
+          duration: 6000,
+        };
+        notification.open(args);
+      }
+    } catch (error) {
+      const args = {
+        message: "Not deleted ❌",
+        description: "Mail Template couldn't deleted ❌",
         duration: 6000,
       };
 
@@ -207,6 +229,7 @@ const Mails = () => {
                 <p>
                   <strong>Template Path Name:</strong> {item.templatePathName}
                 </p>
+                <Button onClick={()=>deleteMailTemplate(item._id)} type="danger">Delete Template</Button>
               </MailWrapper>
             </Card>
           ))}
