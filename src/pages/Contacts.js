@@ -43,7 +43,11 @@ const Contacts = () => {
 
       render: (text, record, index) => (
         <Button
-          onClick={() => (setIsClickedContact(record), setIsOpenDrawer(true))}
+          onClick={() => (
+            setIsClickedContact(record),
+            setIsOpenDrawer(true),
+            updateContactInfo(record)
+          )}
         >
           Reply
         </Button>
@@ -75,14 +79,28 @@ const Contacts = () => {
   useEffect(() => {}, [JSON.stringify(tableParams)]);
 
   const updateContactInfo = async (newValues) => {
+    const payload = { ...newValues, isReaded: true };
+
     try {
-      const response = await services.updateContactByID(
-        newValues._id,
-        newValues
-      );
+      const response = await services.updateContactByID(newValues._id, payload);
       if (response && !response.error) {
         setIsOpenDrawer(false);
         message.success("contact is updated ");
+        contact.refetch();
+      }
+    } catch (error) {
+      message.error("opps something went wrong !!");
+    }
+  };
+
+  const replyTheContact = async (contactID, msg) => {
+    const payload = { ...msg };
+
+    try {
+      const response = await services.updateContactByID(contactID, payload); // To-Do when endpoint is finished, we change there
+      if (response && !response.error) {
+        setIsOpenDrawer(false);
+        message.success("replied");
         contact.refetch();
       }
     } catch (error) {
@@ -109,7 +127,7 @@ const Contacts = () => {
           isOpenDrawer={isOpenDrawer}
           setIsOpenDrawer={setIsOpenDrawer}
           clickedContact={clickedContact}
-          updateContactInfo={updateContactInfo}
+          replyTheContact={replyTheContact}
         />
       )}
     </>

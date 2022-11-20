@@ -5,12 +5,11 @@ import { Input } from "antd";
 const { TextArea } = Input;
 
 const ReplyContactsDrawer = (props) => {
-  const { isOpenDrawer, setIsOpenDrawer, clickedContact, updateContactInfo } =
+  const { isOpenDrawer, setIsOpenDrawer, clickedContact, replyTheContact } =
     props;
 
   const onFinish = (values) => {
-    const payload = { ...values, _id: clickedContact["_id"] };
-    updateContactInfo(payload);
+    replyTheContact(clickedContact["_id"], values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -38,23 +37,6 @@ const ReplyContactsDrawer = (props) => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          label="isRead"
-          name="isRead"
-          rules={[
-            {
-              required: true,
-              message: "Please input your isRead!",
-            },
-          ]}
-          style={{ marginTop: 30 }}
-        >
-          <Radio.Group defaultValue={clickedContact?.isRead ? true : false}>
-            <Radio value={true}> true</Radio>
-            <Radio value={false}> false </Radio>
-          </Radio.Group>
-        </Form.Item>
-
         <Form.Item
           label="replyMessage"
           name="replyMessage"
