@@ -10,7 +10,7 @@ const Contacts = () => {
       title: "status",
       dataIndex: "isRead",
       render: (text, record, index) =>
-        record?.isRead ? (
+        record?.isReaded ? (
           <Badge status="default" />
         ) : (
           <Badge status="processing" />
@@ -146,7 +146,7 @@ const dummyData = [
     createdAt: "2022-11-03T15:06:22.399Z",
     updatedAt: "2022-11-03T15:06:22.399Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6363d8f3dfded1255da083c6",
@@ -156,7 +156,7 @@ const dummyData = [
     createdAt: "2022-11-03T15:06:27.031Z",
     updatedAt: "2022-11-03T15:06:27.031Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6363d905dfded1255da083c8",
@@ -167,7 +167,7 @@ const dummyData = [
     createdAt: "2022-11-03T15:06:45.047Z",
     updatedAt: "2022-11-03T15:06:45.047Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636eeec317a6fc0c27574b12",
@@ -178,7 +178,7 @@ const dummyData = [
     createdAt: "2022-11-12T00:54:27.367Z",
     updatedAt: "2022-11-12T00:54:27.367Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636ef58f8c1a3e8d0dd2154a",
@@ -189,7 +189,7 @@ const dummyData = [
     createdAt: "2022-11-12T01:23:27.350Z",
     updatedAt: "2022-11-12T01:23:27.350Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636efe856c8187f3fbeccda7",
@@ -200,7 +200,7 @@ const dummyData = [
     createdAt: "2022-11-12T02:01:41.063Z",
     updatedAt: "2022-11-12T02:01:41.063Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636fb0829247119a1d07ad44",
@@ -211,7 +211,7 @@ const dummyData = [
     createdAt: "2022-11-12T14:41:06.980Z",
     updatedAt: "2022-11-12T14:41:06.980Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636fb09e9247119a1d07ad46",
@@ -222,7 +222,7 @@ const dummyData = [
     createdAt: "2022-11-12T14:41:34.398Z",
     updatedAt: "2022-11-12T14:41:34.398Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636fb0f79247119a1d07ad48",
@@ -233,7 +233,7 @@ const dummyData = [
     createdAt: "2022-11-12T14:43:03.749Z",
     updatedAt: "2022-11-12T14:43:03.749Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636fff319247119a1d07ad59",
@@ -244,7 +244,7 @@ const dummyData = [
     createdAt: "2022-11-12T20:16:49.111Z",
     updatedAt: "2022-11-12T20:16:49.111Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "636fff469247119a1d07ad5b",
@@ -255,7 +255,7 @@ const dummyData = [
     createdAt: "2022-11-12T20:17:10.848Z",
     updatedAt: "2022-11-12T20:17:10.848Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "637048d1370fb538c92905db",
@@ -266,7 +266,7 @@ const dummyData = [
     createdAt: "2022-11-13T01:30:57.184Z",
     updatedAt: "2022-11-13T01:30:57.184Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6370e71cc284b03c05c5dd79",
@@ -277,7 +277,7 @@ const dummyData = [
     createdAt: "2022-11-13T12:46:20.515Z",
     updatedAt: "2022-11-13T12:46:20.515Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6370e71fc284b03c05c5dd7b",
@@ -288,7 +288,7 @@ const dummyData = [
     createdAt: "2022-11-13T12:46:23.147Z",
     updatedAt: "2022-11-13T12:46:23.147Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6370e720c284b03c05c5dd7d",
@@ -299,7 +299,7 @@ const dummyData = [
     createdAt: "2022-11-13T12:46:24.153Z",
     updatedAt: "2022-11-13T12:46:24.153Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "6370e720c284b03c05c5dd7f",
@@ -310,7 +310,7 @@ const dummyData = [
     createdAt: "2022-11-13T12:46:24.499Z",
     updatedAt: "2022-11-13T12:46:24.499Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "637235cbc284b03c05c5e2fc",
@@ -321,7 +321,7 @@ const dummyData = [
     createdAt: "2022-11-14T12:34:19.555Z",
     updatedAt: "2022-11-14T12:34:19.555Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
   {
     _id: "637235dec284b03c05c5e301",
@@ -332,6 +332,6 @@ const dummyData = [
     createdAt: "2022-11-14T12:34:38.071Z",
     updatedAt: "2022-11-14T12:34:38.071Z",
     __v: 0,
-    isRead: false,
+    isReaded: false,
   },
 ];
