@@ -13,6 +13,7 @@ import Campaigns from "./pages/Campaigns";
 import Mails from "./pages/Mails";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Contacts from "./pages/Contacts";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function App() {
             <Route exact path="/users" component={Users} />
             <Route exact path="/campaigns" component={Campaigns} />
             <Route exact path="/mails" component={Mails} />
+            <Route exact path="/contacts" component={Contacts} />
 
             <Redirect from="*" to="/dashboard" />
           </Main>

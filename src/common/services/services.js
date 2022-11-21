@@ -3,9 +3,9 @@ import HttpClient from "./HttpClient";
 
 export const services = {
   updateCampaign: async (id, body) => {
-    const response = HttpClient.patch(ENDPOINTS.campaigns +`/` + id, body);
+    const response = HttpClient.patch(ENDPOINTS.campaigns + `/` + id, body);
     return response;
-  }, 
+  },
   getAllCampaigns: async () => {
     const response = HttpClient.get(ENDPOINTS.campaigns);
     return response;
@@ -23,20 +23,38 @@ export const services = {
     return response;
   },
   createMailTemplate: async (body) => {
-    const response = HttpClient.post(ENDPOINTS.mailTemplates , body);
+    const response = HttpClient.post(ENDPOINTS.mailTemplates, body);
     return response;
-  }, 
+  },
   deleteMailTemplate: async (id) => {
-    const response = HttpClient.delete(ENDPOINTS.mailTemplates+`/` + id);
+    const response = HttpClient.delete(ENDPOINTS.mailTemplates + `/` + id);
     return response;
-  }, 
+  },
   getAllUsers: async () => {
     const response = HttpClient.get(ENDPOINTS.getAllUsers);
     return response;
   },
-  updateUserByID: async (id) => {
+  getAllContacts: async () => {
+    const response = HttpClient.get(ENDPOINTS.getAllContacts);
+    return response;
+  },
+  updateContactByID: async (id, payload) => {
     try {
-      const response = HttpClient.put(`${ENDPOINTS.updateUserByID}/${id}`);
+      const response = HttpClient.put(
+        `${ENDPOINTS.getAllContacts}/${id}`,
+        payload
+      );
+      return response;
+    } catch (error) {
+      console.log("updateContactByID error ::", error);
+    }
+  },
+  updateUserByID: async (id, payload) => {
+    try {
+      const response = HttpClient.put(
+        `${ENDPOINTS.updateUserByID}/${id}`,
+        payload
+      );
       return response;
     } catch (error) {
       console.log("updateUserByID error ::", error);

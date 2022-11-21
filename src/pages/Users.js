@@ -1,12 +1,16 @@
-/* eslint-disable no-sequences */
 import { useMutation } from "@tanstack/react-query";
 import {
+  Input,
+  Drawer,
   Button,
+  Form,
+  Modal,
   Table,
+  Radio,
   message,
 } from "antd";
 
-import React, {  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetAllUsers } from "../common/hooks/users/use-get-users";
 import { services } from "../common/services/services";
 import UpdateUserInfoDrawer from "../components/drawers/UpdateUserInfoDrawer";
@@ -72,6 +76,8 @@ const Users = () => {
 
   const users = useGetAllUsers();
 
+  useEffect(() => {}, [JSON.stringify(tableParams)]);
+
   const handleTableChange = (pagination, filters, sorter) => {
     setTableParams({
       pagination,
@@ -85,21 +91,33 @@ const Users = () => {
   const mutateUser = useMutation(services.updateUserByID);
 
   const updateUserInfo = async (newValues) => {
-    mutateUser.mutate(newValues._id);
+    // mutateUser.mutate(newValues._id);
+
+    try {
+      const response = await services.updateUserByID(newValues._id, newValues);
+      if (response && !response.error) {
+        setIsOpenDrawer(false);
+        message.success("User information is updated ");
+        users.refetch();
+      }
+    } catch (error) {
+      message.error("opps something went wrong !!");
+    }
   };
 
-  if (mutateUser.isSuccess) {
-    setIsOpenDrawer(false);
-    message.success("User information is updated ");
-    users.refetch();
-  }
-  if (mutateUser.isError) {
-    message.error("opps something went wrong !!");
-  }
+  //TO-DO :: this mutate doesnt work
+  // if (mutateUser.isSuccess) {
+  //   setIsOpenDrawer(false);
+  //   message.success("User information is updated ");
+  //   users.refetch();
+  // }
+  // if (mutateUser.isError) {
+  //   message.error("opps something went wrong !!");
+  // }
 
   return (
     <>
-      {users.isFetched && (
+      {users.isFetched && users?.data?.data["users"].length != 0 && (
         <>
           <Table
             columns={columns}
