@@ -61,6 +61,16 @@ function Sidenav({ color }) {
             <span className="label">Mails</span>
           </NavLink>
         </Menu.Item>
+
+        <Menu.Item key="6-1">
+          <NavLink to="/contacts">
+            <span className="icon">
+              <MailOutlined />
+            </span>
+            <span className="label">Contacts</span>
+          </NavLink>
+        </Menu.Item>
+
         <Menu.Item className="menu-item-header" key="6">
           Account Pages
         </Menu.Item>
